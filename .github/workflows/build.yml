@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,16 +28,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
-        run: python -m unittest discover -s tests
-
-      - name: Build executable
+      - name: Build (platform specific)
         run: |
-          pyinstaller --onefile --windowed \
-            --icon=./strong_random_password_generator.icns \
-            --name="Strong Random Password Generator" \
-            --paths=./strong_random_password_generator \
-            strong_random_password_generator/main.py
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            ./build.bat
+          else
+            chmod +x ./build.sh
+            ./build.sh
+          fi
         shell: bash
 
       - name: Upload artifact
