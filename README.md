@@ -24,7 +24,11 @@ A cross-platform desktop application for generating strong, customizable random 
 ```bash
 ./run.sh
 ```
-or
+or on Windows:
+```bat
+run.bat
+```
+or:
 ```bash
 python strong_random_password_generator/main.py
 ```
@@ -34,6 +38,15 @@ python strong_random_password_generator/main.py
 ```bash
 ./build.sh
 ```
+or on Windows:
+```bat
+build.bat
+```
+
+You can also build executables automatically for Windows, macOS, and Linux using [GitHub Actions](.github/workflows/build.yml).
+
+**Download the executables:**  
+After the GitHub Action completes, go to the "Actions" tab on GitHub, select the workflow run, and download the executables from the "Artifacts" section at the bottom of the run summary page.
 
 ## Requirements
 
@@ -61,7 +74,12 @@ strong_random_password_generator/
 │   ├── __init__.py
 │   └── test_password_generator.py
 ├── build.sh
+├── build.bat
 ├── run.sh
+├── run.bat
+├── requirements.txt
+├── strong_random_password_generator.icns
+├── strong_random_password_generator.ico
 ├── README.md
 └── .gitignore
 ```
