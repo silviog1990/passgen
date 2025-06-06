@@ -4,14 +4,18 @@ from password_generator import generate_password
 
 class PasswordGeneratorApp:
     def __init__(self, root):
+        """
+        Initialize the GUI application and set up all widgets and variables.
+        """
         self.root = root
         self.root.title("Strong Random Password Generator")
+        # Bring window to front on launch for better UX
         self.root.lift()
         self.root.attributes('-topmost', True)
         self.root.after(500, lambda: self.root.lift())
         self.root.after(1000, lambda: self.root.attributes('-topmost', False))
 
-        # Variables
+        # Tkinter variables for user options and state
         self.length_var = tk.StringVar(value="16")
         self.upper_var = tk.BooleanVar(value=True)
         self.lower_var = tk.BooleanVar(value=True)
@@ -25,7 +29,7 @@ class PasswordGeneratorApp:
         self.begins_with_var = tk.StringVar()
         self.result_var = tk.StringVar()
 
-        # Layout
+        # Layout configuration for all widgets
         ttk.Label(root, text="Password Length:").grid(row=0, column=0, sticky="w")
         ttk.Entry(root, textvariable=self.length_var, width=5).grid(row=0, column=1, sticky="w")
 
@@ -33,7 +37,7 @@ class PasswordGeneratorApp:
         ttk.Checkbutton(root, text="Includi minuscole (a-z)", variable=self.lower_var).grid(row=2, column=0, columnspan=2, sticky="w")
         ttk.Checkbutton(root, text="Includi numeri (0-9)", variable=self.digit_var).grid(row=3, column=0, columnspan=2, sticky="w")
 
-        # Symbol row with entry field
+        # Symbols row with entry field for custom symbols
         symbol_frame = ttk.Frame(root)
         symbol_frame.grid(row=4, column=0, columnspan=2, sticky="w")
         ttk.Checkbutton(symbol_frame, text="Includi simboli", variable=self.symbol_var).grid(row=0, column=0, sticky="w")
@@ -43,19 +47,19 @@ class PasswordGeneratorApp:
         ttk.Checkbutton(root, text="Escludi caratteri simili (il1Lo0O)", variable=self.no_similar_var).grid(row=5, column=0, columnspan=2, sticky="w")
         ttk.Checkbutton(root, text="Escludi caratteri duplicati", variable=self.no_duplicate_var).grid(row=6, column=0, columnspan=2, sticky="w")
 
-        # Add Word
+        # Option to add a custom word to the password
         ttk.Checkbutton(root, text="Aggiungi una parola", variable=self.add_word_var).grid(row=7, column=0, sticky="w")
         ttk.Entry(root, textvariable=self.word_var, width=20).grid(row=7, column=1)
 
-        # Begins With
+        # Option to specify a prefix for the password
         ttk.Label(root, text="Inizia con:").grid(row=8, column=0, sticky="w")
         ttk.Entry(root, textvariable=self.begins_with_var, width=5).grid(row=8, column=1, sticky="w")
 
-        # Buttons
+        # Generate password button and result display
         ttk.Button(root, text="Genera Password", command=self.generate_password).grid(row=9, column=0, columnspan=2, pady=10)
         ttk.Entry(root, textvariable=self.result_var, width=40).grid(row=10, column=0, columnspan=2)
 
-        # Copy button + notification
+        # Copy to clipboard button and notification label
         copy_frame = ttk.Frame(root)
         copy_frame.grid(row=11, column=0, columnspan=2)
         ttk.Button(copy_frame, text="Copia negli appunti", command=self.copy_to_clipboard).grid(row=0, column=0)
@@ -63,6 +67,9 @@ class PasswordGeneratorApp:
         self.copy_label.grid(row=0, column=1, padx=10)
 
     def generate_password(self):
+        """
+        Collect user options from the UI, generate a password, and display it.
+        """
         try:
             length = int(self.length_var.get())
         except ValueError:
@@ -70,6 +77,7 @@ class PasswordGeneratorApp:
             return
 
         try:
+            # Delegate password generation to the core logic module
             password = generate_password(
                 length=length,
                 use_upper=self.upper_var.get(),
@@ -84,9 +92,13 @@ class PasswordGeneratorApp:
             )
             self.result_var.set(password)
         except Exception as e:
+            # Show error message in the result field
             self.result_var.set(str(e))
 
     def copy_to_clipboard(self):
+        """
+        Copy the generated password to the system clipboard and show a notification.
+        """
         password = self.result_var.get()
         if password:
             self.root.clipboard_clear()
@@ -96,6 +108,9 @@ class PasswordGeneratorApp:
             self.root.after(2000, lambda: self.copy_label.config(text=""))
 
 def main():
+    """
+    Entry point for the Tkinter GUI application.
+    """
     root = tk.Tk()
     PasswordGeneratorApp(root)
     root.mainloop()
