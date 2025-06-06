@@ -1,7 +1,9 @@
 #!/bin/bash
 
 if command -v python &>/dev/null; then
-    python strong_random_password_generator/main.py
+    PYTHON_CMD=python
 else
-    python3 strong_random_password_generator/main.py
+    PYTHON_CMD=python3
 fi
+
+$PYTHON_CMD strong_random_password_generator/main.py

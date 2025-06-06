@@ -1,7 +1,13 @@
 #!/bin/bash
 
+if command -v python &>/dev/null; then
+    PYTHON_CMD=python
+else
+    PYTHON_CMD=python3
+fi
+
 # Run tests and abort if they fail
-python3 -m unittest discover -s tests
+$PYTHON_CMD -m unittest discover -s tests
 if [ $? -ne 0 ]; then
     echo "❌ Tests failed. Build aborted."
     exit 1
