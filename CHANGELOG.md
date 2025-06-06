@@ -17,5 +17,9 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Icon selection in build process now works correctly for each OS.
 
+## [1.0.1] - 2024-06-10
+### Added
+- Added FAQ in README explaining how to bypass macOS security warning for unsigned apps using `xattr`.
+
 ---
 Older changes are not tracked.

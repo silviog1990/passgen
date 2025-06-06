@@ -87,3 +87,20 @@ strong_random_password_generator/
 ## License
 
 GNU General Public License v3.0 (GPLv3)
+
+## FAQ
+
+### macOS: How to open the app if you get a security warning
+
+If you try to open the app on macOS and see a message like  
+*"Apple cannot verify that this app is free from malware"*  
+and you do **not** see the "Open Anyway" option:
+
+1. Open the **Terminal**.
+2. Run the following command (replace the name if needed):
+   ```bash
+   xattr -d com.apple.quarantine "Strong Random Password Generator.app"
+   ```
+3. Try opening the app again.
+
+This removes the quarantine attribute that macOS applies to files downloaded from the Internet.
