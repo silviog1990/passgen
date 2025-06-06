@@ -10,7 +10,7 @@ fi
 pyinstaller \
     --onefile \
     --windowed \
-    --icon=/Users/s1lv10/workspace/python/strong_random_password_generator/strong_random_password_generator.icns \
+    --icon=./strong_random_password_generator.icns \
     --name="Strong Random Password Generator" \
     --paths=./strong_random_password_generator \
     strong_random_password_generator/main.py
