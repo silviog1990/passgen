@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Esegui i test e interrompi se falliscono
+# Run tests and abort if they fail
 python3 -m unittest discover -s tests
 if [ $? -ne 0 ]; then
-    echo "❌ Test falliti. Build interrotta."
+    echo "❌ Tests failed. Build aborted."
     exit 1
 fi
 

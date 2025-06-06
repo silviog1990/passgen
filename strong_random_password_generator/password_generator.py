@@ -59,7 +59,7 @@ def generate_password(
         required_chars = [c for c in required_chars if c not in 'il1Lo0O']
 
     if not base_chars:
-        raise ValueError("Seleziona almeno un tipo di carattere.")
+        raise ValueError("Select at least one character type.")
 
     password = ""
     used_chars = set()

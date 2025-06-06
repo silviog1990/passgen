@@ -33,36 +33,36 @@ class PasswordGeneratorApp:
         ttk.Label(root, text="Password Length:").grid(row=0, column=0, sticky="w")
         ttk.Entry(root, textvariable=self.length_var, width=5).grid(row=0, column=1, sticky="w")
 
-        ttk.Checkbutton(root, text="Includi maiuscole (A-Z)", variable=self.upper_var).grid(row=1, column=0, columnspan=2, sticky="w")
-        ttk.Checkbutton(root, text="Includi minuscole (a-z)", variable=self.lower_var).grid(row=2, column=0, columnspan=2, sticky="w")
-        ttk.Checkbutton(root, text="Includi numeri (0-9)", variable=self.digit_var).grid(row=3, column=0, columnspan=2, sticky="w")
+        ttk.Checkbutton(root, text="Include uppercase (A-Z)", variable=self.upper_var).grid(row=1, column=0, columnspan=2, sticky="w")
+        ttk.Checkbutton(root, text="Include lowercase (a-z)", variable=self.lower_var).grid(row=2, column=0, columnspan=2, sticky="w")
+        ttk.Checkbutton(root, text="Include digits (0-9)", variable=self.digit_var).grid(row=3, column=0, columnspan=2, sticky="w")
 
         # Symbols row with entry field for custom symbols
         symbol_frame = ttk.Frame(root)
         symbol_frame.grid(row=4, column=0, columnspan=2, sticky="w")
-        ttk.Checkbutton(symbol_frame, text="Includi simboli", variable=self.symbol_var).grid(row=0, column=0, sticky="w")
+        ttk.Checkbutton(symbol_frame, text="Include symbols", variable=self.symbol_var).grid(row=0, column=0, sticky="w")
         self.symbols_entry = ttk.Entry(symbol_frame, textvariable=self.symbols_var, width=30)
         self.symbols_entry.grid(row=0, column=1, padx=5)
 
-        ttk.Checkbutton(root, text="Escludi caratteri simili (il1Lo0O)", variable=self.no_similar_var).grid(row=5, column=0, columnspan=2, sticky="w")
-        ttk.Checkbutton(root, text="Escludi caratteri duplicati", variable=self.no_duplicate_var).grid(row=6, column=0, columnspan=2, sticky="w")
+        ttk.Checkbutton(root, text="Exclude similar characters (il1Lo0O)", variable=self.no_similar_var).grid(row=5, column=0, columnspan=2, sticky="w")
+        ttk.Checkbutton(root, text="Exclude duplicate characters", variable=self.no_duplicate_var).grid(row=6, column=0, columnspan=2, sticky="w")
 
         # Option to add a custom word to the password
-        ttk.Checkbutton(root, text="Aggiungi una parola", variable=self.add_word_var).grid(row=7, column=0, sticky="w")
+        ttk.Checkbutton(root, text="Add a word", variable=self.add_word_var).grid(row=7, column=0, sticky="w")
         ttk.Entry(root, textvariable=self.word_var, width=20).grid(row=7, column=1)
 
         # Option to specify a prefix for the password
-        ttk.Label(root, text="Inizia con:").grid(row=8, column=0, sticky="w")
+        ttk.Label(root, text="Begins with:").grid(row=8, column=0, sticky="w")
         ttk.Entry(root, textvariable=self.begins_with_var, width=5).grid(row=8, column=1, sticky="w")
 
         # Generate password button and result display
-        ttk.Button(root, text="Genera Password", command=self.generate_password).grid(row=9, column=0, columnspan=2, pady=10)
+        ttk.Button(root, text="Generate Password", command=self.generate_password).grid(row=9, column=0, columnspan=2, pady=10)
         ttk.Entry(root, textvariable=self.result_var, width=40).grid(row=10, column=0, columnspan=2)
 
         # Copy to clipboard button and notification label
         copy_frame = ttk.Frame(root)
         copy_frame.grid(row=11, column=0, columnspan=2)
-        ttk.Button(copy_frame, text="Copia negli appunti", command=self.copy_to_clipboard).grid(row=0, column=0)
+        ttk.Button(copy_frame, text="Copy to clipboard", command=self.copy_to_clipboard).grid(row=0, column=0)
         self.copy_label = ttk.Label(copy_frame, text="", foreground="green")
         self.copy_label.grid(row=0, column=1, padx=10)
 
@@ -73,7 +73,7 @@ class PasswordGeneratorApp:
         try:
             length = int(self.length_var.get())
         except ValueError:
-            self.result_var.set("Lunghezza non valida")
+            self.result_var.set("Invalid length")
             return
 
         try:
@@ -104,7 +104,7 @@ class PasswordGeneratorApp:
             self.root.clipboard_clear()
             self.root.clipboard_append(password)
             self.root.update()
-            self.copy_label.config(text="✅ Copiato!")
+            self.copy_label.config(text="✅ Copied!")
             self.root.after(2000, lambda: self.copy_label.config(text=""))
 
 def main():
